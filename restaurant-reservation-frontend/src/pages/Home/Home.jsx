@@ -15,7 +15,7 @@ export default function Home() {
     <Header />
 
     <main>
-       <img className="main-image" src={Main} alt="main" style={{ width: "80%", height: "auto" }} />
+       <img className="main-image" src={Main} alt="main" style={{ width: "100%", height: "auto" }} />
 
     </main>
     
