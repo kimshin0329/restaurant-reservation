@@ -1,0 +1,47 @@
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+}
+
+.logo {
+    width: 120px;
+    height: auto;
+    cursor: pointer;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+.header-right {
+    display: flex;
+    gap: 20px;
+
+    font-size : 20px;
+    
+}
+
+nav button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #1F4D3A;
+    
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+  
+}
+
+button:hover{
+  color:gray;
+}

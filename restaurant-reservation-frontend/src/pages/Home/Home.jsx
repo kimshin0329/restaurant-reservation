@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom"
-
+import Header from "../../components/Header/Header.jsx"
+import Footer from "../../components/Footer/Footer.jsx"
+import Main from "../../assets/images/Brand/main.png"
 
 
 
@@ -10,18 +12,14 @@ export default function Home() {
     return(
 
         <>
-    <header>
-        <h1>자리잡다</h1>
-    </header>
+    <Header />
 
     <main>
-        { " \u00A0"}{ " \u00A0"}<button onClick={()=>{navigate("/")}}>MAIN</button>
-        { " \u00A0"}{ " \u00A0"}<button onClick={()=>{navigate("/Login")}}>Login</button>
-        { " \u00A0"}{ " \u00A0"}<button onClick={()=>{navigate("/Signup")}}>Signup</button>
+       <img className="main-image" src={Main} alt="main" style={{ width: "80%", height: "auto" }} />
 
     </main>
     
-    <footer>푸터입니다.</footer>
+    <Footer />
     
     </>
         
