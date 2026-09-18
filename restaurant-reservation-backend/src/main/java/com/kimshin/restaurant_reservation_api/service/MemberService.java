@@ -3,6 +3,7 @@ package com.kimshin.restaurant_reservation_api.service;
 import com.kimshin.restaurant_reservation_api.repository.MemberRepository;
 import com.kimshin.restaurant_reservation_api.domain.Member;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +13,15 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public Member join(String name, String email) {
+    public Member join(String name, String email,String password) {
         validateDuplicateMember(email);
-        Member member = new Member(name, email);
+
+        String encodedPassword = passwordEncoder.encode(password);
+
+        Member member = new Member(name,email,encodedPassword);
+
         return memberRepository.save(member);
     }
 

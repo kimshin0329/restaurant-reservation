@@ -13,8 +13,29 @@ export default function Signup() {
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const onSubmit = (data) => {
-        console.log(data);
+    
+    const onSubmit = async (data) => {
+        const response = await fetch('/api/members',{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if(response.ok){
+            alert("회원가입이 완료되었습니다.");
+            navigate("/Login");
+        } else{
+            alert(result.message);
+        }
+
+
+    
+        
+       
     }
 
     return(
@@ -23,19 +44,15 @@ export default function Signup() {
               
         <form onSubmit={handleSubmit(onSubmit)}>
             <input
-            id="nickname"
+            id="name"
             type="text"
-            placeholder="닉네임을 입력해주세요."
-            {...register("nickname", { required: "닉네임을 입력해주세요." })}
-            aria-invalid={errors.nickname ? "true" : "false"}
+            placeholder="이름을 입력해주세요."
+            {...register("name", { required: "이름을 입력해주세요." })}
+            aria-invalid={errors.name ? "true" : "false"}
             />
-            {errors.nickname && <p role="alert">{errors.nickname.message}</p>}
-        </form>
+            {errors.name && <p role="alert">{errors.name.message}</p>}
 
-    
-              
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input
+             <input
             id="email"
             type="email"
             placeholder="이메일을 입력해주세요."
@@ -48,10 +65,7 @@ export default function Signup() {
         aria-invalid={errors.email ? "true" : "false"}
         />
         {errors.email && <p role="alert">{errors.email.message}</p>}
-        </form>
-
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input
+         <input
             id="password"
             type="password"
             placeholder="비밀번호를 입력해주세요."
@@ -64,12 +78,17 @@ export default function Signup() {
         aria-invalid={errors.password ? "true" : "false"}
         />
         {errors.password && <p role="alert">{errors.password.message}</p>}
-            
+
+        <button className="login-button" type="submit">
+            회원가입
+        </button>   
+        
         </form>
 
 
-        <button className="login-button" type="submit" onClick={handleSubmit(onSubmit)}>회원가입</button>
+
         </>
+        
     )
 
 }
