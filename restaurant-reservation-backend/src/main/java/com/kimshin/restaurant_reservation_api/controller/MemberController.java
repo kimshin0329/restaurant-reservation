@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
 
+
+    //회원가입 요청
     @PostMapping
     public MemberResponse join(@RequestBody MemberRequest request) {
         Member member = memberService.join(

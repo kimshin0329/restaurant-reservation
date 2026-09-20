@@ -15,6 +15,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
+    // 회원가입
     public Member join(String name, String email,String password) {
         validateDuplicateMember(email);
 
@@ -25,17 +26,18 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
+    // 이메일 중복 검증
     private void validateDuplicateMember(String email){
         if (findMemberByEmail(email) != null){
             throw new IllegalStateException("이미 존재하는 이메일입니다.");
         }
     }
-
+    // 이메일로 회원 조회
     public Member findMemberByEmail(String email) {
         return memberRepository.findByEmail(email);
     }
 
-
+    // 전체 회원 조회
     public List<Member> findAllMembers() {
         return memberRepository.findAll();
     }

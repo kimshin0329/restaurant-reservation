@@ -10,6 +10,8 @@ import lombok.Getter;
 @Getter
 public class Member {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,8 +21,11 @@ public class Member {
     private String password;
 
 
+    //JPA 엔티티 생성을 위한 기본 생성자
     protected Member() {}
 
+
+    //회원 정보를 저장하는 엔티티
     public Member(String name, String email, String password) {
         this.name = name;
         this.email = email;

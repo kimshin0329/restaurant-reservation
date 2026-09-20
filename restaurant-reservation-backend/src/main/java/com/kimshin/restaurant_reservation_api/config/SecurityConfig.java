@@ -11,11 +11,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+    //비밀번호를 암호화하여 저장할 때 사용하는 PasswordEncoder
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // 회원가입 API는 인증 없이 요청 허용
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
