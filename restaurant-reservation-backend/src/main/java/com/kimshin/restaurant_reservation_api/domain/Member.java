@@ -1,9 +1,6 @@
 package com.kimshin.restaurant_reservation_api.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
@@ -19,6 +16,10 @@ public class Member {
     private String name;
     private String email;
     private String password;
+
+    // 권한 (기본값 CUSTOMER)
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.CUSTOMER;
 
 
     //JPA 엔티티 생성을 위한 기본 생성자

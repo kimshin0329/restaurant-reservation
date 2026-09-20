@@ -14,9 +14,31 @@ export default function Login() {
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const onSubmit = (data) => {
-        console.log(data);
+   const onSubmit = async (data) => {
+        const response = await fetch('/api/auth/login',{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+
+
+        if (response.ok) {
+            alert("로그인에 성공했습니다.");
+            navigate("/");
+            console.log(result);
+        } else {
+            alert(result.message);
+        }
+            
+
+        
     }
+
 
     return(
         <>
@@ -31,13 +53,13 @@ export default function Login() {
                 value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
                 message: "이메일 형식이 올바르지 않습니다.",
             },
+            
         })}
         aria-invalid={errors.email ? "true" : "false"}
         />
         {errors.email && <p role="alert">{errors.email.message}</p>}
-        </form>
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input
+
+        <input
             id="password"
             type="password"
             placeholder="비밀번호를 입력해주세요."
@@ -50,18 +72,23 @@ export default function Login() {
         aria-invalid={errors.password ? "true" : "false"}
         />
         {errors.password && <p role="alert">{errors.password.message}</p>}
-            
-        </form>
-        <button className="login-button" type="submit" onClick={handleSubmit(onSubmit)}>로그인</button>
+
+        
+        <button className="login-button" type="submit">
+        로그인
+    </button>
         
         <Link to="/Signup" className="signup-link">
             아직 회원이 아니신가요?
         </Link>
+        </form>
+        </>
+    )
             
 
-        </>
-
         
-    )
-
 }
+        
+    
+
+

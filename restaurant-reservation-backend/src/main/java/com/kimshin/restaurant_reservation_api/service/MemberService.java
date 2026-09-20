@@ -1,10 +1,12 @@
 package com.kimshin.restaurant_reservation_api.service;
 
+import com.kimshin.restaurant_reservation_api.DTO.MemberRequest;
 import com.kimshin.restaurant_reservation_api.repository.MemberRepository;
 import com.kimshin.restaurant_reservation_api.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -16,12 +18,12 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     // 회원가입
-    public Member join(String name, String email,String password) {
-        validateDuplicateMember(email);
+    public Member join(MemberRequest request) {
+        validateDuplicateMember(request.getEmail());
 
-        String encodedPassword = passwordEncoder.encode(password);
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
 
-        Member member = new Member(name,email,encodedPassword);
+        Member member = new Member(request.getName(),request.getEmail(),encodedPassword);
 
         return memberRepository.save(member);
     }

@@ -28,6 +28,8 @@
 * MySQL
 * Gradle
 * Lombok
+* JWT
+* Spring Security
 
 ### Frontend
 
@@ -110,7 +112,7 @@ restaurant-reservation/
 
 ## 🔧 기술적 구현
 
-프로젝트를 진행하면서 주요 기술의 적용 과정과 선택 이유를 기록합니다.
+
 
 * JWT / Spring Security
 * JPA
@@ -120,7 +122,7 @@ restaurant-reservation/
 
 ## 🐛 트러블슈팅
 
-프로젝트 개발 과정에서 발생한 문제와 해결 과정을 기록합니다.
+
 
 * 문제 상황
 * 원인
@@ -129,7 +131,7 @@ restaurant-reservation/
 
 ## 💡 회고
 
-프로젝트를 진행하면서 새롭게 학습한 내용과 개발 과정에서 느낀 점을 기록합니다.
+
 
 * 구현 과정에서 알게 된 내용
 * 기술을 선택한 이유

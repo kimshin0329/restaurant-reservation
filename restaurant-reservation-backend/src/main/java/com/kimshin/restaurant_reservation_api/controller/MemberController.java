@@ -18,11 +18,7 @@ public class MemberController {
     //회원가입 요청
     @PostMapping
     public MemberResponse join(@RequestBody MemberRequest request) {
-        Member member = memberService.join(
-                request.getName(),
-                request.getEmail(),
-                request.getPassword()
-        );
+        Member member = memberService.join(request);
         return new MemberResponse(member);
     }
 
