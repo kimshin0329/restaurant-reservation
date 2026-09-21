@@ -40,6 +40,48 @@ public class JwtProvider {
 
     }
 
+    // JWT 검증
+    public boolean validateToken(String token) {
+        try {
+            SecretKey key = Keys.hmacShaKeyFor(
+                    Decoders.BASE64.decode(secret)
+            );
 
+            Jwts.parser()
+                    .verifyWith(key)
+                    .build()
+                    .parseSignedClaims(token);
+
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
+    public String getMemberId(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+
+        return Jwts.parser().verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getSubject();
+    }
+
+
+    public String getRole(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(
+                Decoders.BASE64.decode(secret)
+        );
+
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("role", String.class);
+    }
 
 }

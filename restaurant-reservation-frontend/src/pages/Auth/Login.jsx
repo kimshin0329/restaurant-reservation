@@ -14,30 +14,31 @@ export default function Login() {
         handleSubmit,
         formState: { errors },
     } = useForm();
-   const onSubmit = async (data) => {
-        const response = await fetch('/api/auth/login',{
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
+const onSubmit = async (data) => {
+    const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
 
-        const result = await response.json();
+    const result = await response.json();
 
+    if (response.ok) {
+        alert("로그인에 성공했습니다.");
 
+        sessionStorage.setItem("accessToken",result.accessToken);
+        navigate("/");
 
-        if (response.ok) {
-            alert("로그인에 성공했습니다.");
-            navigate("/");
-            console.log(result);
-        } else {
-            alert(result.message);
-        }
+    } else {
+        alert(result.message);
+    }
+};
             
 
         
-    }
+    
 
 
     return(
@@ -89,6 +90,6 @@ export default function Login() {
         
 }
         
-    
+
 
 

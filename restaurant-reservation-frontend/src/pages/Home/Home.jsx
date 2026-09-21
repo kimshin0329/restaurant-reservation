@@ -8,18 +8,17 @@ import { useEffect } from "react"
 
 export default function Home() {
 
-    useEffect(() =>{
-        fetch('/api/test')
-        .then(response => response.text())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error('spring 연결 실패 :',error);
-        });
-    }, []);
+    
 
     const navigate = useNavigate();
+    useEffect(() => { const token = sessionStorage.getItem("accessToken"); 
+        fetch("/api/members/me", 
+            { method: "GET", headers: { Authorization: `Bearer ${token}`, }, }) 
+            .then(response => response.text()) .then(data => { console.log(data); }) 
+            .catch(error => { console.error("Spring 연결 실패:", error); }); }, []);
+    
+
+       
     return(
 
         <>

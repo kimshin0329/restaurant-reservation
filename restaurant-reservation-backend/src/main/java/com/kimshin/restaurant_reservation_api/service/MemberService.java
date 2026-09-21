@@ -43,4 +43,11 @@ public class MemberService {
     public List<Member> findAllMembers() {
         return memberRepository.findAll();
     }
+
+    // 회원 Id 조회
+    public Member findById(Long memberId){
+        return memberRepository.findById(memberId)
+                .orElseThrow(()-> new IllegalArgumentException("회원을 찾을 수 없습니다."));
+
+    }
 }
