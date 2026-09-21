@@ -89,8 +89,8 @@ restaurant-reservation/
 * [x] MySQL / JPA 환경 구성
 * [x] 회원 엔티티 구현
 * [x] 회원가입 API 기본 구현
-* [ ] JWT 인증 구현
-* [ ] Spring Security 적용
+* [x] JWT 인증 구현
+* [x] Spring Security 적용
 * [ ] CORS 설정
 * [ ] 식당 기능 구현
 * [ ] 예약 기능 구현
@@ -114,11 +114,14 @@ restaurant-reservation/
 
 
 
-* JWT / Spring Security
-* JPA
-* React Hook Form
-* REST API
-* CORS
+### 🔐 JWT / Spring Security
+
+1. **인증**: 로그인 시 이메일과 비밀번호를 검증하고 JWT Access Token 발급
+2. **검증**: Spring Security Filter에서 JWT 검증 후 인증 정보 생성
+3. **사용자 식별**: JWT의 회원 ID를 이용해 인증된 사용자 식별
+4. **회원 조회**: 인증된 회원의 ID를 이용한 `/api/members/me` API 구현
+
+
 
 ## 🐛 트러블슈팅
 
