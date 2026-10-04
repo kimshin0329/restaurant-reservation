@@ -1,11 +1,22 @@
 import Logo from "../../assets/images/Brand/Logo.png"
 import "./Header.css"
 import { useNavigate } from "react-router-dom"
+import { useState } from "react";
 
 
 
 export default function Header() {
     const navigate = useNavigate();
+
+    const [isLoggedIn, setIsLoggedIn] = useState(
+        !!sessionStorage.getItem("accessToken")
+    );
+
+    const handleLogout = () => {
+        sessionStorage.removeItem("accessToken");
+        setIsLoggedIn(false);
+        navigate("/");
+    }
     return (
         
         <header>
@@ -22,8 +33,14 @@ export default function Header() {
         </nav>
         
         <div className="header-right">
+            {isLoggedIn ? (
+            <button onClick={handleLogout}>로그아웃</button>
+            ) : (
+        <>
             <button onClick={() => navigate("/login")}>로그인</button>
             <button onClick={() => navigate("/signup")}>회원가입</button>
+        </>
+        )}
         </div>
         
         </header>
