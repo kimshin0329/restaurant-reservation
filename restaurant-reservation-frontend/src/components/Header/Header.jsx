@@ -34,7 +34,11 @@ export default function Header() {
         
         <div className="header-right">
             {isLoggedIn ? (
+                <>
+            <button onClick={() => navigate("/RestaurantApply")}>식당 등록 신청</button>
+
             <button onClick={handleLogout}>로그아웃</button>
+            </>
             ) : (
         <>
             <button onClick={() => navigate("/login")}>로그인</button>

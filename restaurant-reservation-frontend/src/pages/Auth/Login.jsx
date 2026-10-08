@@ -58,7 +58,7 @@ const onSubmit = async (data) => {
         })}
         aria-invalid={errors.email ? "true" : "false"}
         />
-        {errors.email && <p role="alert">{errors.email.message}</p>}
+        {errors.email && <p className="error-message" role="alert">{errors.email.message}</p>}
 
         <input
             id="password"
@@ -72,7 +72,7 @@ const onSubmit = async (data) => {
         })}
         aria-invalid={errors.password ? "true" : "false"}
         />
-        {errors.password && <p role="alert">{errors.password.message}</p>}
+        {errors.password && <p className="error-message" role="alert">{errors.password.message}</p>}
 
         
         <button className="login-button" type="submit">

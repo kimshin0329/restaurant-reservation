@@ -1,0 +1,59 @@
+
+.RestaurantApply-logo {
+    display: block;
+    width: 180px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.form-label {
+    
+    color : black;
+    font : 16px;
+    font-weight:600;
+    width: 560px;
+    text-align: left;
+}
+
+form {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 10px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+input {
+    width : 530px;
+    height: 50px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+   
+    
+}
+.RestaurantApply-button {
+    width: 450px;
+    height: 50px;
+    background-color: #1F4D3A;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 auto;
+    
+    
+    
+}
+.RestaurantApply-button :hover {
+    background-color: #164532;
+}
+
+.error-message {
+    color: red;
+    font-size: 20px;
+}
