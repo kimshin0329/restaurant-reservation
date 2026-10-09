@@ -59,7 +59,7 @@ public class JwtProvider {
         }
     }
 
-
+    // ID 조회
     public String getMemberId(String token) {
         SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
 
@@ -70,7 +70,7 @@ public class JwtProvider {
                 .getSubject();
     }
 
-
+    // 역할 조회
     public String getRole(String token) {
         SecretKey key = Keys.hmacShaKeyFor(
                 Decoders.BASE64.decode(secret)

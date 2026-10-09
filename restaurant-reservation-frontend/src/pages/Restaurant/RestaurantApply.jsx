@@ -1,3 +1,6 @@
+
+import { useContext,useState, useEffect } from "react";
+import { MemberContext } from "../../context/MemberContext";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/Brand/Logo.png";
 import { useForm } from "react-hook-form";
@@ -9,9 +12,54 @@ import "./RestaurantApply.css";
 
 export default function RestaurantApply() {
 
+    const { member, setMember } = useContext(MemberContext);
+
     const navigate = useNavigate();
 
-    const memberName = "김신";
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+    const fetchMember = async () => {
+        setIsLoading(true);
+        setError("");
+
+        try {
+            const token = sessionStorage.getItem("accessToken");
+
+            if (!token) {
+                throw new Error("로그인이 필요합니다. 다시 로그인해 주세요.");
+            }
+
+            const response = await fetch("/api/members/me", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    throw new Error("로그인이 만료되었습니다. 다시 로그인해 주세요.");
+                }
+
+                throw new Error("회원 정보를 불러오지 못했습니다.");
+            }
+
+            const data = await response.json();
+
+            setMember(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+        fetchMember();
+    }, [setMember]);
+   
 
     const {
             register,
@@ -20,8 +68,39 @@ export default function RestaurantApply() {
         } = useForm();
 
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        try{
+
+            const token = sessionStorage.getItem("accessToken");
+
+            if(!token){
+                throw new Error("로그인이 필요합니다. 다시 로그인해 주세요.");
+
+            }
+            const response = await fetch('/api/owner-applications',{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+
+                },
+                body: JSON.stringify(data),
+            });
+            if (!response.ok){
+                if(response.status === 401){
+                    throw new Error("로그인이 만료되었습니다. 다시 로그인해 주세요.");
+
+                }
+                throw new Error("식당 등록 신청에 실패했습니다.");
+            }
+
+            setError("");
+            alert("식당 등록 신청이 완료되었습니다.");
+            navigate("/");
+        } catch(err){
+            setError(err.message);
+        }
+        
 };
 
 return(
@@ -47,18 +126,25 @@ return(
                 },
             })}
         />
+        {errors.restaurantName && (
+        <p className="error-message" role="alert">{errors.restaurantName.message}</p>
+        )}
+        
         <label className="form-label" htmlFor="representativeName">대표자명(수정불가)</label>
 
         <input
             id="representativeName"
             type="text"
-            value={memberName}
+            value={member?.name ?? ""}
             readOnly
         />
 
-    {errors.restaurantName && (
-        <p className="error-message" role="alert">{errors.restaurantName.message}</p>
-        )}
+        {isLoading && <p>회원 정보를 불러오는 중입니다.</p>}
+
+        {error && <p className="error-message">{error}</p>}
+        
+
+    
         
 
         <label className="form-label"htmlFor="restaurantPhone">연락처</label>

@@ -91,7 +91,7 @@ restaurant-reservation/
 * [x] 회원가입 API 기본 구현
 * [x] JWT 인증 구현
 * [x] Spring Security 적용
-* [ ] CORS 설정
+* [x] 식당 등록 신청 API 구현
 * [ ] 식당 기능 구현
 * [ ] 예약 기능 구현
 * [ ] 리뷰 기능 구현
@@ -104,6 +104,8 @@ restaurant-reservation/
 * [x] 공통 Header 구성
 * [x] 로그인 페이지 구현
 * [x] 회원가입 페이지 구현
+* [x] 식당 등록 신청 페이지 구현
+* [ ] 식당 등록 신청 현황 표시
 * [ ] 식당 목록 및 상세 페이지
 * [ ] 예약 페이지
 * [ ] 마이페이지
@@ -120,6 +122,13 @@ restaurant-reservation/
 2. **검증**: Spring Security Filter에서 JWT 검증 후 인증 정보 생성
 3. **사용자 식별**: JWT의 회원 ID를 이용해 인증된 사용자 식별
 4. **회원 조회**: 인증된 회원의 ID를 이용한 `/api/members/me` API 구현
+
+### 🏪 식당 등록 신청
+1. **신청 정보 검증**: @Valid와 Bean Validation을 이용해 필수 입력값 검증
+2. **신청자 식별**: JWT 인증 정보를 이용해 현재 로그인한 회원의 ID 확인
+3. **데이터 저장**: Spring Data JPA를 이용해 식당 등록 신청 정보를 MySQL에 저장
+4. **신청 상태 관리**: PENDING, APPROVED, REJECTED 상태를 Enum으로 정의
+5. **생성 일시 관리**: @PrePersist를 이용해 신청 데이터 생성 시각 설정
 
 
 

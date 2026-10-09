@@ -32,6 +32,8 @@ public class SecurityConfig {
                                 "/api/members",
                                 "/api/auth/login"
                         ).permitAll()
+
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(

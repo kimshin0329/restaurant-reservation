@@ -4,10 +4,7 @@ import com.kimshin.restaurant_reservation_api.DTO.LoginRequest;
 import com.kimshin.restaurant_reservation_api.DTO.LoginResponse;
 import com.kimshin.restaurant_reservation_api.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +19,8 @@ public class AuthController {
     public LoginResponse Login(@RequestBody LoginRequest request) {
         return authService.login(request);
     }
+
+
 
 
 
