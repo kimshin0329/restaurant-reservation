@@ -1,5 +1,5 @@
 
-import { useContext,useState, useEffect } from "react";
+import { useContext,useState, useEffect, useRef } from "react";
 import { MemberContext } from "../../context/MemberContext";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/Brand/Logo.png";
@@ -20,10 +20,17 @@ export default function RestaurantApply() {
 
     const [error, setError] = useState("");
 
+    const alertShown = useRef(false);
+
     useEffect(() => {
+        let cancelled = false;
+
+        
     const fetchMember = async () => {
         setIsLoading(true);
         setError("");
+
+        
 
         try {
             const token = sessionStorage.getItem("accessToken");
@@ -49,16 +56,36 @@ export default function RestaurantApply() {
 
             const data = await response.json();
 
-            setMember(data);
+            if(!cancelled){
+                setMember(data);
+
+            }
+
+            
         } catch (err) {
-            setError(err.message);
+            if(!cancelled && !alertShown.current){
+                alertShown.current = true;
+                
+            alert(err.message);
+            sessionStorage.removeItem("accessToken");
+            navigate("/Login",{ replace: true});
+            }
+            
         } finally {
-            setIsLoading(false);
+            if(!cancelled){
+                setIsLoading(false);
+            }
+            
         }
     };
 
         fetchMember();
-    }, [setMember]);
+
+        return () => {
+            cancelled = true;
+            
+        }
+    }, [setMember, navigate]);
    
 
     const {

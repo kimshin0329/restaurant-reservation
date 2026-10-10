@@ -32,6 +32,7 @@ public class SecurityConfig {
                                 "/api/members",
                                 "/api/auth/login"
                         ).permitAll()
+                        .requestMatchers("/api/owner-applications").hasRole("CUSTOMER")
 
 
                         .anyRequest().authenticated()
