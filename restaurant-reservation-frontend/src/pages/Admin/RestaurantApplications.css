@@ -1,0 +1,95 @@
+
+.RestaurantApplications {
+    min-height: 100vh;
+    background: #f8f9fc;
+    color: #252936;
+}
+
+.RA-header {
+    height: 76px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.RA-header img {
+    width: 150px;
+    cursor: pointer;
+}
+
+.RA-header button {
+    padding: 10px 16px;
+    background: white;
+    border: 1px solid #d8dce5;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.RA-container {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 45px 30px;
+}
+
+.RA-container h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.RA-container > p {
+    color: #737b8c;
+    margin-bottom: 28px;
+}
+
+.RA-list {
+    padding: 24px;
+    background: white;
+    border: 1px solid #e5e8ef;
+    border-radius: 12px;
+}
+
+.RA-list h3 {
+    margin-top: 0;
+    margin-bottom: 22px;
+    font-size: 19px;
+}
+
+.RA-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.RA-table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+.RA-table th {
+    padding: 15px 12px;
+    background: #f2f4f8;
+    font-weight: 600;
+}
+
+.RA-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #edf0f4;
+    text-align: center;
+}
+
+.RA-error {
+    color: #d94a4a;
+}
+
+@media (max-width: 768px) {
+    .RA-container {
+        padding: 28px 15px;
+    }
+
+    .RA-list {
+        padding: 15px;
+    }
+}

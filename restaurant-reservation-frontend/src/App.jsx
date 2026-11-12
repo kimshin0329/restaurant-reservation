@@ -5,7 +5,9 @@ import Login from './pages/Auth/Login.jsx'
 import Signup from './pages/Auth/Signup.jsx'
 import RestaurantApply from './pages/Restaurant/RestaurantApply.jsx';
 import AdminDashboard from './pages/Admin/AdminDashboard.jsx';
+import RestaurantApplications from './pages/Admin/RestaurantApplications.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
       <Route path="/Signup" element={<Signup />} />
       <Route path="/RestaurantApply" element={<RestaurantApply />} />
       <Route path="/AdminDashboard" element={<AdminDashboard />} />
+      <Route path="/Admin/RestaurantApplications" element={<RestaurantApplications />} />
     </Routes>
     </BrowserRouter>
     
