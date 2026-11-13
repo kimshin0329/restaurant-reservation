@@ -25,6 +25,11 @@ public class OwnerApplication {
     @Column(nullable = false)
     private ApplicationStatus status = ApplicationStatus.PENDING;
 
+    // 신청 상태 변경
+    public void changeStatus(ApplicationStatus status) {
+        this.status = status;
+    }
+
     // 한 사용자가 여러 개의 신청 가능
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
@@ -40,10 +45,12 @@ public class OwnerApplication {
 
 
     //신청 날짜
+
+
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @PrePersist
-    @Column(nullable = false, updatable = false)
     protected void onCreate() {
         createdAt = LocalDateTime.now();
     }

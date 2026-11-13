@@ -46,6 +46,36 @@ export default function RestaurantApplications() {
         fetchApplications();
     }, [navigate]);
 
+    // 식당 등록 신청 승인 및 거절
+    const handleStatusChange = async (id, status) => {
+        const token = sessionStorage.getItem("accessToken");
+
+        try {
+            const response = await fetch(`/api/admin/owner-applications/${id}`, {
+                method: "PATCH",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ status }),
+            });
+
+            if (!response.ok) {
+                throw new Error("신청 상태 변경에 실패했습니다.");
+            }
+
+            // 화면에 표시된 신청 상태 변경
+            setApplications((prev) =>
+                prev.map((item) =>
+                    item.id === id ? { ...item, status } : item
+                )
+            );
+
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
     // 신청일 표시
     const formatDate = (date) => {
         if (!date) return "-";
@@ -94,6 +124,7 @@ export default function RestaurantApplications() {
                                         <th>주소</th>
                                         <th>신청일</th>
                                         <th>상태</th>
+                                        <th>관리</th>
                                     </tr>
                                 </thead>
 
@@ -107,14 +138,33 @@ export default function RestaurantApplications() {
                                             <td>{item.restaurantAddress}</td>
                                             <td>{formatDate(item.createdAt)}</td>
                                             <td>{item.status}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    )}
+                                            <td>
+                                                {item.status === "PENDING" ? (
+                                                    <>
+                                                        <button
+                                                            onClick={() => handleStatusChange(item.id, "APPROVED")}
+                                                        >
+                                                            승인
+                                                        </button>
 
-                </section>
+                                                        <button
+                                                            onClick={() => handleStatusChange(item.id, "REJECTED")}
+                                                        >
+                                                            거절
+                                                        </button>
+                                                    </>
+                                                ) : (
+                                                    <span>처리 완료</span>
+                                                )}
+                                            </td>
+                                        </tr>
+                                                                                ))}
+                                    </tbody>
+                                </table>
+                            </div>
+        )}
+
+            </section>
 
             </main>
         </div>

@@ -33,4 +33,8 @@ public class Member {
         this.password = password;
     }
 
+    public void changeRole(Role role){
+        this.role = role;
+    }
+
 }
